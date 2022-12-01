@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 const CalculatorChange = () => {
+
+  useEffect(() => {
+    document.title = 'Change calculator';
+  }, []);
+
   return (
     <div>
       Calculator
