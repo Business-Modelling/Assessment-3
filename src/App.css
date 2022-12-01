@@ -1,6 +1,9 @@
+* {
+  font: font-Montserrat;
+  color: secondary;
+}
 .App {
   text-align: center;
-  font: font-Montserrat;
 }
 
 .App-logo {
