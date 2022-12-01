@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
-import { BrowserRouter as Link } from "react-router-dom";
+import React, {useState, useEffect} from 'react'
 
 const AdminLogin = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [invalid, setInvalid] = useState(false)
+
+  useEffect(() => {
+    document.title = 'Admin Login';
+  }, []);
 
   const usernameChange = (value) => {
     setName(value.target.value)
