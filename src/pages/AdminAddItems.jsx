@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import CreateItems from './items/CreateItems';
 
 const AdminAddItems = () => {
 
@@ -8,7 +9,7 @@ const AdminAddItems = () => {
 
   return (
     <div>
-      AddItems
+      <CreateItems/>
     </div>
   )
 }
