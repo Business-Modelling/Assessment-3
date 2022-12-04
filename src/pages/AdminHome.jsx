@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 
 const AdminHome = () => {
 
-  useEffect(() => {
+  /*useEffect(() => {
     document.title = 'Admin Home';
-  }, []);
+  }, []);*/
 
   const toHome = () => {
     document.location.href = "/"

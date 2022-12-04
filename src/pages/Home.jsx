@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 
 const Home = () => {
 
-  useEffect(() => {
+  /*useEffect(() => {
     document.title = 'Home';
-  }, []);
+  }, []);*/
 
   return (
     <>

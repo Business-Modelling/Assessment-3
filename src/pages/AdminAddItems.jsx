@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 
 const AdminAddItems = () => {
 
-  useEffect(() => {
+  /*useEffect(() => {
     document.title = 'Admin add items';
-  }, []);
+  }, []);*/
 
   const toHome = () => {
     document.location.href = "/"
