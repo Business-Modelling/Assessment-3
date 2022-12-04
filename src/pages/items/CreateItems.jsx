@@ -8,6 +8,7 @@ const CreateItems = () => {
     const [type, setType] = useState("");
     const [quantity, setQuantity] = useState("");
     const [expi, setExpi] = useState("");
+    const [alert, setAlert] = useState(false);
 
     const ref = collection(firestore, "items");
 
@@ -23,6 +24,11 @@ const CreateItems = () => {
         }
         try {
             addDoc(ref, data);
+            setName("");
+            setExpi("");
+            setQuantity("");
+            setType("");
+            setAlert(true);
         } catch {
             console.log(e);
         }
@@ -49,7 +55,14 @@ const CreateItems = () => {
       duration-150
       ease-in-out">Return</button>
             </div>
-        <div className='flex flex-row justify-center items-center content-center pt-32 text-center space-x-24'>
+        <div className='flex flex-col justify-center items-center content-center pt-32 text-center space-x-24'>
+            { alert ?
+            <div className="alert bg-green-100 rounded-lg ml-20 py-5 px-6 mb-3 text-base text-green-700 alert-dismissible fade show" role="alert">
+            <strong className="mr-1">Item created ! </strong> you can close this pop-up.
+            <button type="button" className="btn-close box-content w-4 h-4 p-1 ml-auto text-green-900 border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:green-900 hover:opacity-75 hover:no-underline" data-bs-dismiss="alert" aria-label="Close" onClick={() => {setAlert(false)}}></button>
+          </div> :
+            false
+            }
             <form onSubmit={handleSubmit}>
                 <div className="form-group mb-6">
                     <label className="form-label inline-block mb-2 text-gray-700">Item Name</label>

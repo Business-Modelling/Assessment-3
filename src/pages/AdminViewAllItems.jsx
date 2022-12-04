@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import ViewItems from './items/ViewItems';
 
 const AdminViewAllItems = () => {
 
@@ -8,7 +9,7 @@ const AdminViewAllItems = () => {
 
   return (
     <div>
-      View all items
+      <ViewItems/>
     </div>
   )
 }
