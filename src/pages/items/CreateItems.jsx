@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import 'tw-elements';
 import { firestore } from "../../firebase"
 import { addDoc, collection } from "@firebase/firestore"
+import Swal from 'sweetalert2'
 
 const CreateItems = () => {
     const [name, setName] = useState("");
@@ -29,6 +30,13 @@ const CreateItems = () => {
             setQuantity("");
             setType("");
             setAlert(true);
+            Swal.fire({
+                position: 'top',
+                icon: 'success',
+                title: 'Item added successfully',
+                showConfirmButton: false,
+                timer: 1500
+              })
         } catch {
             console.log(e);
         }
@@ -56,13 +64,13 @@ const CreateItems = () => {
       ease-in-out">Return</button>
             </div>
         <div className='flex flex-col justify-center items-center content-center pt-32 text-center space-x-24'>
-            { alert ?
+            {/* { alert ?
             <div className="alert bg-green-100 rounded-lg ml-20 py-5 px-6 mb-3 text-base text-green-700 alert-dismissible fade show" role="alert">
             <strong className="mr-1">Item created ! </strong> you can close this pop-up.
             <button type="button" className="btn-close box-content w-4 h-4 p-1 ml-auto text-green-900 border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:green-900 hover:opacity-75 hover:no-underline" data-bs-dismiss="alert" aria-label="Close" onClick={() => {setAlert(false)}}></button>
           </div> :
             false
-            }
+            } */}
             <form onSubmit={handleSubmit}>
                 <div className="form-group mb-6">
                     <label className="form-label inline-block mb-2 text-gray-700">Item Name</label>
@@ -141,11 +149,12 @@ const CreateItems = () => {
                 </div>
                 <label className="form-label inline-block mb-2 text-gray-700">Expiration Date</label>
                 <div className="datepicker relative form-floating mb-3 xl:w-96">
-                    <input type="text"
+                    <input type="date"
                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="Select a date: dd/mm/yyyy" value={expi} onChange={(e) => setExpi(e.target.value)}
+                        data-mdb-toggle="datepicker"
                         required />
-                    <label for="floatingInput" class="text-gray-700">Select a date = dd/mm/yyyy</label>
+                    <label for="floatingInput" className="text-gray-700">Select a date</label>
                 </div>
                 <button type="submit" className="
       w-full

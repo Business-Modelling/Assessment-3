@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, getDocs, doc} from "firebase/firestore";
 import { firestore } from "../../firebase";
 
 const ViewItems = () => {
@@ -19,15 +19,20 @@ const ViewItems = () => {
         fetchPost();
     }, [])
 
-    const deleteItem = event => {
-        // console.log(items);
-        // setItems(items.splice(event.currentTarget.id, 1))
-        // console.log(items);
+    const deleteItem = async event => {
+        //setItems(items.filter((item, idx) => idx !== Number(event.currentTarget.id)));
+        try {
+
+            await deleteDoc(doc(firestore, "items", items[event.currentTarget.id].id))
+            fetchPost();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
-        <div className='flex'>
-            <div className='justify-left'>
+        <div>
+            <div>
             <button onClick={() => document.location.href = "/AdminHome"} className="
       px-6
       py-2.5
@@ -47,7 +52,7 @@ const ViewItems = () => {
       duration-150
       ease-in-out">Return</button>
             </div>
-            <div className='flex flex-wrap items-center justify-center'>
+            <div className='flex flex-wrap justify-center'>
             
             {items?.map((item, i) => (
                 <div key={i} className="p-6 rounded-lg shadow-lg m-6 bg-white w-2/6 space-x-6">
