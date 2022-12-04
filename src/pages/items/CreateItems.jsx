@@ -28,7 +28,6 @@ const CreateItems = () => {
             setExpi("");
             setQuantity("");
             setType("");
-            setAlert(true);
             Swal.fire({
                 position: 'top',
                 icon: 'success',
