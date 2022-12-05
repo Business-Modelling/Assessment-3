@@ -5,9 +5,9 @@ const AdminLogin = () => {
   const [password, setPassword] = useState("");
   const [invalid, setInvalid] = useState(false)
 
-  /*useEffect(() => {
+  useEffect(() => {
     document.title = 'Admin Login';
-  }, []);*/
+  }, []);
 
   const usernameChange = (value) => {
     setName(value.target.value)

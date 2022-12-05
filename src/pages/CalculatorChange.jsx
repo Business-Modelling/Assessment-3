@@ -7,9 +7,9 @@ const CalculatorChange = () => {
   const [changeValue, setChangeValue] = useState(0.0);
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     document.title = 'Change calculator';
-  }, []);*/
+  }, []);
 
   const basketValueModification = (value) => {
     setBasketValue(parseFloat(value.target.value.replace(",", ".")))
