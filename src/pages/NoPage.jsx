@@ -2,9 +2,9 @@ import React, {useEffect} from 'react'
 
 const NoPage = () => {
 
-  useEffect(() => {
+  /*useEffect(() => {
     document.title = '404';
-  }, []);
+  }, []);*/
 
   return (
     <div>
