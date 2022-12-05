@@ -29,14 +29,20 @@ const CreateItems = () => {
             setQuantity("");
             setType("");
             Swal.fire({
-                position: 'top',
+                position: 'center',
                 icon: 'success',
                 title: 'Item added successfully',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 2000
             })
         } catch {
-            console.log(e);
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'An error occur',
+                showConfirmButton: false,
+                timer: 2000
+            })
         }
     }
     return (

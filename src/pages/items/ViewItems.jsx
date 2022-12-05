@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { collection, deleteDoc, getDocs, doc } from "firebase/firestore";
 import { firestore } from "../../firebase";
+import Swal from 'sweetalert2';
 
 const ViewItems = () => {
 
@@ -25,8 +26,21 @@ const ViewItems = () => {
 
             await deleteDoc(doc(firestore, "items", items[event.currentTarget.id].id))
             fetchPost();
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Item deleted successfully',
+                showConfirmButton: false,
+                timer: 2000
+            })
         } catch (e) {
-            console.log(e);
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'An error occur',
+                showConfirmButton: false,
+                timer: 2000
+            })
         }
     }
 
@@ -55,7 +69,7 @@ const ViewItems = () => {
             <div className='flex flex-wrap justify-center'>
 
                 {items?.map((item, i) => (
-                    <div key={i} className="p-6 rounded-lg shadow-lg m-6 bg-white w-2/6 space-x-6">
+                    <div key={i} className="p-6 rounded-lg shadow-lg m-6 bg-white w-2/6 space-x-6 border border-gray-300">
                         <h5 className="text-gray-900 text-xl leading-tight font-medium mb-2">{item.name}</h5>
                         <p className="text-gray-700 text-base mb-4">
                             Category : {item.type}
