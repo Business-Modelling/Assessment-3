@@ -171,7 +171,7 @@ const Home = () => {
       <div className='w-5/6 flex flex-wrap flex-row h-full'>
         {Items.map(item => {
           return (
-            <div className='grow mx-2 mb-4 max-w-lg w-1/4 h-1/5 rounded-lg border border-gray-300 shadow-xlcfont-Montserrat'>
+            <div className='grow mx-2 mb-4 max-w-lg w-1/4 h-1/5 rounded-lg border border-gray-300 shadow-xl'>
               <div className='flex flex-col p-3 space-y-5'>
                 <div className='text-center font-bold font-Montserrat'>
                   {item.name}
@@ -216,12 +216,12 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {itemsBasket.map(item => {
               return (
-                <div className='h-24 flex flex-col'>
-                  <div className='flex justify-between my-2 mr-2'>
+                <div className='h-24 flex flex-col mr-2'>
+                  <div className='flex justify-between my-2'>
                     <div className='text-md font-bold'>{item.name}</div>
                     <div>x{item.quantity}</div>
                   </div>
-                  <div className='self-end mr-2'>
+                  <div className='self-end'>
                     {item.price} €
                   </div>
                   <div className='self-end text-xs italic'>
