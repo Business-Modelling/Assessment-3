@@ -1,5 +1,4 @@
 import './App.css';
-import CreateItems from './pages/items/CreateItems';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
