@@ -10,112 +10,112 @@ const Home = () => {
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'OOI',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'DFGFV',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
     {
       name: 'BVFE',
       date: '13/25/5655',
       price: '50',
       categories: 'luxury',
-      VTA: '50%',
+      VAT: '50%',
     },
 
   ]
@@ -165,7 +165,7 @@ const Home = () => {
 
   const options = [
     { value: "Luxury", label: "Luxury" },
-    { value: "Essenital", label: "Essenital" },
+    { value: "Essential", label: "Essential" },
     { value: "Gift", label: "Gift" }
   ];
 
@@ -188,6 +188,17 @@ const Home = () => {
               value={categories}
               onChange={handleChange}
               options={options}
+              classNames={{
+                menu: `absolute bg-white w-full rounded-lg text-lg border border-gray-200`,
+                listItem: ({ isSelected }) => (
+                  `block transition duration-200 px-2 py-2 cursor-pointer select-none rounded
+                  ${
+                    isSelected
+                      ? `text-white bg-secondary`
+                      : `text-gray-500 hover:bg-gray-100 hover:text-secondary`
+                  }`
+              )
+              }}
             />
           </div>
         </div>
@@ -217,10 +228,10 @@ const Home = () => {
                   </div>
                   <div className='flex justify-between'>
                     <div>
-                      VTA: 
+                      VAT: 
                     </div>
                     <div>
-                    {item.VTA}
+                    {item.VAT}
                     </div>
                   </div>
                   <button className='w-fit px-3 py-2 self-center rounded-lg bg-secondary text-white font-medium leading-tight shadow-md hover:bg-primary hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-midnight active:shadow-lg transition duration-150 ease-in-out'>
@@ -248,7 +259,7 @@ const Home = () => {
                     {item.price} €
                   </div>
                   <div className='self-end text-xs italic'>
-                    (VTA included)
+                    (VAT included)
                   </div>
                 </div>
               )
