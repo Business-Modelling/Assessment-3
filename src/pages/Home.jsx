@@ -14,10 +14,11 @@ const Home = () => {
   })
 
   function addItemToBasket(name, vat, price, quantity=1) {
+    const tva = {'5%': 1.05, '10%':1.10, '20%':1.20, '50%':1.50}
     setBasketList([...basketList, {
       name:name,
       vat:vat,
-      price:price*quantity,
+      price:price*tva[vat]*quantity,
       quantity:quantity
     }])
   }
