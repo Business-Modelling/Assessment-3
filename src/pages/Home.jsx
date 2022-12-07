@@ -4,9 +4,25 @@ import BasketPrice from '../components/BasketPrice';
 import CardMarket from '../components/CardMarket';
 import Divider from '../components/Divider';
 import ItemBasket from '../components/ItemBasket';
+import {collection, getDocs, query, where} from "firebase/firestore";
+import {firestore} from "../firebase";
 
 const Home = () => {
   const [categories, setCategories] = useState(null);
+  const [items, setItems] = useState([]);
+
+  const fetchPost = async (type) => {
+    await getDocs(query(
+        collection(firestore, "items")), 
+        where("type", "==", "Luxury"))
+        .then((querySnapshot) => {
+          const newData = querySnapshot.docs
+              .map((doc) => ({ ...doc.data(), id: doc.id }));
+          setItems(newData);
+          console.log(items, newData);
+        })
+  };
+
   const [basketList, setBasketList] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("basketListStorage"))
     const initialValue = saved
@@ -23,6 +39,28 @@ const Home = () => {
     }])
   }
 
+  useEffect(() => {
+    fetchPost("Luxury");
+  }, [])
+
+  function checkVAT(type){
+    if (type === "Luxury")
+        return "20%"
+    if (type === "Essential")
+        return "10%"
+    if (type === "Gift")
+        return "5%"
+  }
+
+  function checkPrice(type){
+    if (type === "Luxury")
+      return "50"
+    if (type === "Essential")
+      return "30"
+    if (type === "Gift")
+      return "20"
+  }
+
   function removeItemToBasket(idx) {
     const tmp = [...basketList]
     tmp.splice(idx,1)
@@ -33,7 +71,7 @@ const Home = () => {
     localStorage.setItem("basketListStorage", JSON.stringify(basketList))
   }, [basketList])
 
-  const Items = [
+  const test = [
     {
       name: 'bag',
       date: '13/25/5655',
@@ -215,6 +253,7 @@ const Home = () => {
   ];
 
   const handleChange = value => {
+    fetchPost(value);
     setCategories(value);
   };
 
@@ -255,9 +294,9 @@ const Home = () => {
           </div>
         </div>
         <div className='flex flex-wrap flex-row h-full mt-32'>
-          {Items.map((item, idx) => {
+          {items.map((item, idx) => {
             return (
-              <CardMarket key={idx} name={item.name}  price={item.price} date={item.date} vat={item.VAT} quantity={item.quantity}
+              <CardMarket key={idx} name={item.name}  price={checkPrice(item.type)} date={item.expi} vat={checkVAT(item.type)} quantity={item.quantity}
                 addItemToBasket = {addItemToBasket}
               />
             )
