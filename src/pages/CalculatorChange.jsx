@@ -37,9 +37,9 @@ const CalculatorChange = () => {
   }
 
   const clear = () => {
-    setAmountValue();
-    setBasketValue();
-    setChangeValue();
+    setAmountValue("");
+    setBasketValue("");
+    setChangeValue(0);
   }
 
   return (
