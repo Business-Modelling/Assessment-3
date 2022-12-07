@@ -7,6 +7,24 @@ import ItemBasket from '../components/ItemBasket';
 
 const Home = () => {
   const [categories, setCategories] = useState(null);
+  const [basketList, setBasketList] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem("basketListStorage"))
+    const initialValue = saved
+    return initialValue || []
+  })
+
+  function addItemToBasket(name, vat, price, quantity=1) {
+    setBasketList([...basketList, {
+      name:name,
+      vat:vat,
+      price:price*quantity,
+      quantity:quantity
+    }])
+  }
+
+  useEffect(() => {
+    localStorage.setItem("basketListStorage", JSON.stringify(basketList))
+  }, [basketList])
 
   const Items = [
     {
@@ -15,6 +33,7 @@ const Home = () => {
       price: '100',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'OOI',
@@ -22,6 +41,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'DFGFV',
@@ -29,6 +49,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -36,6 +57,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -43,6 +65,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -50,6 +73,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -57,6 +81,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -64,6 +89,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -71,6 +97,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -78,6 +105,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -85,6 +113,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -92,6 +121,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -99,6 +129,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -106,6 +137,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -113,6 +145,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
     {
       name: 'BVFE',
@@ -120,6 +153,7 @@ const Home = () => {
       price: '50',
       categories: 'luxury',
       VAT: '50%',
+      quantity:1
     },
 
   ]
@@ -209,7 +243,9 @@ const Home = () => {
         <div className='flex flex-wrap flex-row h-full mt-32'>
           {Items.map((item, idx) => {
             return (
-              <CardMarket key={idx} name={item.name}  price={item.price} date={item.date} vat={item.VAT} />
+              <CardMarket key={idx} name={item.name}  price={item.price} date={item.date} vat={item.VAT} quantity={item.quantity}
+                addItemToBasket = {addItemToBasket}
+              />
             )
           })}
         </div>
@@ -219,7 +255,7 @@ const Home = () => {
           <div className='text-center text-lg font-bold my-2'>Basket</div>
           <Divider />
           <div className='my-2 grow overflow-y-auto'>
-            {itemsBasket.map((item, idx) => {
+            {basketList.map((item, idx) => {
               return (
                 <ItemBasket key={idx} name={item.name} quantity={item.quantity} price={item.price}/>
               )
