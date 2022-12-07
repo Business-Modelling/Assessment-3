@@ -13,15 +13,18 @@ const Home = () => {
 
   const fetchPost = async (type) => {
     await getDocs(query(
-        collection(firestore, "items")), 
-        where("type", "==", "Luxury"))
+        collection(firestore, "items"),
+        where("type", "==", type)))
         .then((querySnapshot) => {
           const newData = querySnapshot.docs
               .map((doc) => ({ ...doc.data(), id: doc.id }));
           setItems(newData);
           console.log(items, newData);
         })
-  };
+  }
+  useEffect(() => {
+    fetchPost("Luxury");
+  }, [])
 
   const [basketList, setBasketList] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("basketListStorage"))
@@ -30,7 +33,7 @@ const Home = () => {
   })
 
   function addItemToBasket(name, vat, price, quantity=1) {
-    const tva = {'5%': 1.05, '10%':1.10, '20%':1.20, '50%':1.50}
+    const tva = {'5%': 1.05, '10%':1.10, '20%':1.20}
     setBasketList([...basketList, {
       name:name,
       vat:vat,
@@ -38,10 +41,6 @@ const Home = () => {
       quantity:quantity
     }])
   }
-
-  useEffect(() => {
-    fetchPost("Luxury");
-  }, [])
 
   function checkVAT(type){
     if (type === "Luxury")
@@ -61,190 +60,13 @@ const Home = () => {
       return "20"
   }
 
-  function removeItemToBasket(idx) {
-    const tmp = [...basketList]
-    tmp.splice(idx,1)
-    setBasketList(tmp)
+  function clearBasket() {
+    setBasketList([])
   }
 
   useEffect(() => {
     localStorage.setItem("basketListStorage", JSON.stringify(basketList))
   }, [basketList])
-
-  const test = [
-    {
-      name: 'bag',
-      date: '13/25/5655',
-      price: '100',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'OOI',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'DFGFV',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-
-  ]
-
-  const itemsBasket = [
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },{
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-  ]
 
   const options = [
     { value: "Luxury", label: "Luxury" },
@@ -253,7 +75,7 @@ const Home = () => {
   ];
 
   const handleChange = value => {
-    fetchPost(value);
+    fetchPost(value.value);
     setCategories(value);
   };
 
@@ -264,7 +86,7 @@ const Home = () => {
 
   function basketPrice(itemBasket) {
     let price = 0
-    itemBasket.map((item) => price += item.price*item.quantity)
+    itemBasket.map((item) => price += item.price)
 
     return price
   }
@@ -310,10 +132,11 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {basketList.map((item, idx) => {
               return (
-                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price} removeItemToBasket={removeItemToBasket}/>
+                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price}/>
               )
             })}
           </div>
+          <button onClick={clearBasket} className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Clear Basket</button>
           <Divider />
           <BasketPrice price={basketPrice(basketList)} />
         </div>
