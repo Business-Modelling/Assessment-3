@@ -270,7 +270,7 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {basketList.map((item, idx) => {
               return (
-                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price*item.quantity} removeItemToBasket={removeItemToBasket}/>
+                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price} removeItemToBasket={removeItemToBasket}/>
               )
             })}
           </div>
