@@ -182,6 +182,13 @@ const Home = () => {
     setCategories({ value: "Luxury", label: "Luxury" })
   }, []);
 
+  function basketPrice(itemBasket) {
+    let price = 0
+    itemBasket.map((item) => price += item.price*item.quantity)
+
+    return price
+  }
+
   return (
     <>
     <div className='flex justify-between h-full'>
@@ -221,12 +228,12 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {itemsBasket.map((item, idx) => {
               return (
-                <ItemBasket key={idx} name={item.name} quantity={item.quantity} price={item.price}/>
+                <ItemBasket key={idx} name={item.name} quantity={item.quantity} price={item.price*item.quantity}/>
               )
             })}
           </div>
           <Divider />
-          <BasketPrice price={10} />
+          <BasketPrice price={basketPrice(itemsBasket)} />
         </div>
       </div>
     </div>
