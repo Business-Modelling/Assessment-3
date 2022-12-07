@@ -4,9 +4,28 @@ import BasketPrice from '../components/BasketPrice';
 import CardMarket from '../components/CardMarket';
 import Divider from '../components/Divider';
 import ItemBasket from '../components/ItemBasket';
+import {collection, getDocs, query, where} from "firebase/firestore";
+import {firestore} from "../firebase";
 
 const Home = () => {
   const [categories, setCategories] = useState(null);
+  const [items, setItems] = useState([]);
+
+  const fetchPost = async (type) => {
+    await getDocs(query(
+        collection(firestore, "items"),
+        where("type", "==", type)))
+        .then((querySnapshot) => {
+          const newData = querySnapshot.docs
+              .map((doc) => ({ ...doc.data(), id: doc.id }));
+          setItems(newData);
+          console.log(items, newData);
+        })
+  }
+  useEffect(() => {
+    fetchPost("Luxury");
+  }, [])
+
   const [basketList, setBasketList] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("basketListStorage"))
     const initialValue = saved
@@ -14,7 +33,7 @@ const Home = () => {
   })
 
   function addItemToBasket(name, vat, price, quantity=1) {
-    const tva = {'5%': 1.05, '10%':1.10, '20%':1.20, '50%':1.50}
+    const tva = {'5%': 1.05, '10%':1.10, '20%':1.20}
     setBasketList([...basketList, {
       name:name,
       vat:vat,
@@ -23,190 +42,31 @@ const Home = () => {
     }])
   }
 
-  function removeItemToBasket(idx) {
-    const tmp = [...basketList]
-    tmp.splice(idx,1)
-    setBasketList(tmp)
+  function checkVAT(type){
+    if (type === "Luxury")
+        return "20%"
+    if (type === "Essential")
+        return "10%"
+    if (type === "Gift")
+        return "5%"
+  }
+
+  function checkPrice(type){
+    if (type === "Luxury")
+      return "50"
+    if (type === "Essential")
+      return "30"
+    if (type === "Gift")
+      return "20"
+  }
+
+  function clearBasket() {
+    setBasketList([])
   }
 
   useEffect(() => {
     localStorage.setItem("basketListStorage", JSON.stringify(basketList))
   }, [basketList])
-
-  const Items = [
-    {
-      name: 'bag',
-      date: '13/25/5655',
-      price: '100',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'OOI',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'DFGFV',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-    {
-      name: 'BVFE',
-      date: '13/25/5655',
-      price: '50',
-      categories: 'luxury',
-      VAT: '50%',
-      quantity:1
-    },
-
-  ]
-
-  const itemsBasket = [
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-
-    {
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },{
-      name: 'OUII',
-      quantity: 6,
-      price: 50,
-    },
-  ]
 
   const options = [
     { value: "Luxury", label: "Luxury" },
@@ -215,6 +75,7 @@ const Home = () => {
   ];
 
   const handleChange = value => {
+    fetchPost(value.value);
     setCategories(value);
   };
 
@@ -225,7 +86,7 @@ const Home = () => {
 
   function basketPrice(itemBasket) {
     let price = 0
-    itemBasket.map((item) => price += item.price*item.quantity)
+    itemBasket.map((item) => price += item.price)
 
     return price
   }
@@ -255,9 +116,9 @@ const Home = () => {
           </div>
         </div>
         <div className='flex flex-wrap flex-row h-full mt-32'>
-          {Items.map((item, idx) => {
+          {items.map((item, idx) => {
             return (
-              <CardMarket key={idx} name={item.name}  price={item.price} date={item.date} vat={item.VAT} quantity={item.quantity}
+              <CardMarket key={idx} name={item.name}  price={checkPrice(item.type)} date={item.expi} vat={checkVAT(item.type)} quantity={item.quantity}
                 addItemToBasket = {addItemToBasket}
               />
             )
@@ -271,10 +132,11 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {basketList.map((item, idx) => {
               return (
-                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price} removeItemToBasket={removeItemToBasket}/>
+                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price}/>
               )
             })}
           </div>
+          <button onClick={clearBasket} className="text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Clear Basket</button>
           <Divider />
           <BasketPrice price={basketPrice(basketList)} />
         </div>
