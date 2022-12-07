@@ -37,7 +37,7 @@ const CardMarket = ({name, price, date, vat, quantity,addItemToBasket}) => {
         </div>
         <div className='flex justify-between '>
             <div>
-              Qantity: 
+              Quantity: 
             </div>
             <div>
               <input type="number" 
