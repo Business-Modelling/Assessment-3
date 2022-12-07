@@ -22,6 +22,12 @@ const Home = () => {
     }])
   }
 
+  function removeItemToBasket(idx) {
+    const tmp = [...basketList]
+    tmp.splice(idx,1)
+    setBasketList(tmp)
+  }
+
   useEffect(() => {
     localStorage.setItem("basketListStorage", JSON.stringify(basketList))
   }, [basketList])
@@ -264,12 +270,12 @@ const Home = () => {
           <div className='my-2 grow overflow-y-auto'>
             {basketList.map((item, idx) => {
               return (
-                <ItemBasket key={idx} name={item.name} quantity={item.quantity} price={item.price*item.quantity}/>
+                <ItemBasket key={idx} idx={idx} name={item.name} vat={item.vat} quantity={item.quantity} price={item.price*item.quantity} removeItemToBasket={removeItemToBasket}/>
               )
             })}
           </div>
           <Divider />
-          <BasketPrice price={basketPrice(itemsBasket)} />
+          <BasketPrice price={basketPrice(basketList)} />
         </div>
       </div>
     </div>
