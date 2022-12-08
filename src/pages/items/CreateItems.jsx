@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 const CreateItems = () => {
     const [name, setName] = useState("");
-    const [type, setType] = useState("");
+    const [type, setType] = useState("Luxury");
     const [quantity, setQuantity] = useState("");
     const [expi, setExpi] = useState("");
 
@@ -113,8 +113,7 @@ const CreateItems = () => {
                 m-0
                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example"
                             value={type} onChange={(e) => setType(e.target.value)} required>
-                            <option selected>Select menu</option>
-                            <option value="Luxury">Luxury</option>
+                            <option selected value="Luxury">Luxury</option>
                             <option value="Essential">Essential</option>
                             <option value="Gift">Gift</option>
                         </select>

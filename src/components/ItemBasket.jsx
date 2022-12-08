@@ -1,4 +1,5 @@
 import React from 'react'
+import Divider from './Divider'
 
 const itemBasket = ({idx, name, vat, quantity, price, removeItemToBasket}) => {
   return (
@@ -15,6 +16,7 @@ const itemBasket = ({idx, name, vat, quantity, price, removeItemToBasket}) => {
           (VAT included: {vat})
         </div>
       </div>
+      <div className='self-center border-b border-gray-300 w-58 my-2' />
     </>
   )
 }
