@@ -19,7 +19,6 @@ const Home = () => {
           const newData = querySnapshot.docs
               .map((doc) => ({ ...doc.data(), id: doc.id }));
           setItems(newData);
-          console.log(items, newData);
         })
   }
   useEffect(() => {
@@ -125,7 +124,7 @@ const Home = () => {
           })}
         </div>
       </div>
-      <div className='w-1/6 fixed right-0 h-5/6 border-l border-b bg-white border-gray-200 shadow-inner mx-1 flex pl-3 py-3'>
+      <div className='w-1/6 fixed right-0 h-5/6 border-l border-b bg-white border-gray-200 shadow-inner mx-1 flex px-3 py-3'>
         <div className='flex flex-col justify-between w-full'>
           <div className='text-center text-lg font-bold my-2'>Basket</div>
           <Divider />
