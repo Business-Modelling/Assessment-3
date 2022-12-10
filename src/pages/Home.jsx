@@ -6,6 +6,7 @@ import Divider from '../components/Divider';
 import ItemBasket from '../components/ItemBasket';
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {firestore} from "../firebase";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [categories, setCategories] = useState(null);
@@ -34,11 +35,11 @@ const Home = () => {
 
   function calculate(type, quantity) {
     if (type === "Luxury")
-      return 60*quantity
+      Swal.fire("It will cost you " + 60*quantity + "€")
     if (type === "Essential")
-      return 33*quantity
+      Swal.fire("It will cost you " + 33*quantity + "€")
     if (type === "Gift")
-      return 21*quantity
+      Swal.fire("It will cost you " + 21*quantity + "€")
   }
 
   function addItemToBasket(name, vat, price, quantity=1) {
