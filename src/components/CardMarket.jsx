@@ -51,16 +51,16 @@ const CardMarket = ({name, price, date, vat, quantity, type, addItemToBasket, ca
                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[25%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
+          <button className='w-fit px-3 py-2 self-center rounded-lg bg-white text-secondary border border-secondary font-medium leading-tight shadow-md transition duration-500 ease-in-out transform hover:-translate-y-1'
+                  onClick={() => {calculate(type, value)}}
+          >
+            Calculate
+          </button>
           <button className='w-fit px-3 py-2 self-center rounded-lg bg-secondary text-white font-medium leading-tight shadow-md hover:bg-primary hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-midnight active:shadow-lg transition duration-150 ease-in-out'
             onClick={() => {addItemToBasket(name, vat, price, value)
             setValue(1)}}
           >
             Add to basket
-          </button>
-          <button className='w-fit px-3 py-2 self-center rounded-lg bg-secondary text-white font-medium leading-tight shadow-md hover:bg-primary hover:shadow-lg focus:bg-primary focus:shadow-lg focus:outline-none focus:ring-0 active:bg-midnight active:shadow-lg transition duration-150 ease-in-out'
-                  onClick={() => {calculate(type, value)}}
-          >
-            Calculate
           </button>
         </div>
       </div>

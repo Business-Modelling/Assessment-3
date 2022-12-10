@@ -34,11 +34,29 @@ const Home = () => {
 
   function calculate(type, quantity) {
     if (type === "Luxury")
-      Swal.fire("It will cost you " + 60*quantity + "€")
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "It will cost you " + 60*quantity + "€",
+        showConfirmButton: true,
+        timer: 3000,
+      });
     if (type === "Essential")
-      Swal.fire("It will cost you " + 33*quantity + "€")
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "It will cost you " + 33*quantity + "€",
+        showConfirmButton: true,
+        timer: 3000,
+      });
     if (type === "Gift")
-      Swal.fire("It will cost you " + 21*quantity + "€")
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "It will cost you " + 21*quantity + "€",
+        showConfirmButton: true,
+        timer: 3000,
+      });
   }
 
   function addItemToBasket(name, vat, price, quantity=1) {
