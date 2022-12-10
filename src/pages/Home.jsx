@@ -32,6 +32,15 @@ const Home = () => {
     return initialValue || []
   })
 
+  function calculate(type, quantity) {
+    if (type === "Luxury")
+      return 60*quantity
+    if (type === "Essential")
+      return 33*quantity
+    if (type === "Gift")
+      return 21*quantity
+  }
+
   function addItemToBasket(name, vat, price, quantity=1) {
     const tva = {'5%': 1.05, '10%':1.10, '20%':1.20}
     setBasketList([...basketList, {
@@ -119,7 +128,7 @@ const Home = () => {
           {items.map((item, idx) => {
             return (
               <CardMarket key={idx} name={item.name}  price={checkPrice(item.type)} date={item.expi} vat={checkVAT(item.type)} quantity={item.quantity}
-                addItemToBasket = {addItemToBasket}
+                addItemToBasket = {addItemToBasket} calculate={calculate} type={item.type}
               />
             )
           })}
