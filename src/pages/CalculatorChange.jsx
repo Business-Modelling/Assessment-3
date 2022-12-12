@@ -1,10 +1,23 @@
 import React, {useEffect, useState} from 'react'
 
 const CalculatorChange = () => {
-  const [basketValue, setBasketValue] = useState();
+  const [basketList, setBasketList] = useState(() => {
+    const saved = JSON.parse(localStorage.getItem("basketListStorage"))
+    const initialValue = saved
+    return initialValue || []
+  })
+
+  const [basketValue, setBasketValue] = useState(basketPrice(basketList));
   const [amountValue, setAmountValue] = useState();
   const [changeValue, setChangeValue] = useState(0);
 
+  function basketPrice(itemBasket) {
+    let price = 0
+    itemBasket.map((item) => price += item.price)
+    if (price === 0)
+      return ""
+    return price
+  }
 
   useEffect(() => {
     document.title = 'Change calculator';

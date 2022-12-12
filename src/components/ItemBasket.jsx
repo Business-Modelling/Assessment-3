@@ -1,5 +1,4 @@
 import React from 'react'
-import Divider from './Divider'
 
 const itemBasket = ({idx, name, vat, quantity, price, removeItemToBasket}) => {
   return (
