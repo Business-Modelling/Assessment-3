@@ -3,7 +3,6 @@ import App from './App';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 
 test('App Home Page', async () => {
   render(<App />, {wrapper: BrowserRouter})
