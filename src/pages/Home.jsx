@@ -122,7 +122,7 @@ const Home = () => {
     <>
     <div className='flex justify-between h-full'>
       <div className='flex flex-col w-5/6'>
-        <div className='w-5/6 bg-white shadow-xl h-24 flex justify-center items-center fixed '>
+        <div className='w-5/6 bg-white shadow-xl h-24 flex justify-center items-center fixed z-10'>
           <div className='w-1/4'>
             <Select
               value={categories}
