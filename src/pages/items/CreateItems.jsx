@@ -90,7 +90,7 @@ const CreateItems = () => {
       <div className="flex flex-col justify-center items-center content-center pt-32 text-center space-x-24">
         <form onSubmit={handleSubmit}>
           <div className="form-group mb-6">
-            <label className="form-label inline-block mb-2 text-gray-700">
+            <label htmlFor='NameItem' className="form-label inline-block mb-2 text-gray-700">
               Item Name
             </label>
             <input
