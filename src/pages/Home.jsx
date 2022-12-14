@@ -144,11 +144,17 @@ const Home = () => {
         </div>
         <div className='flex flex-wrap flex-row h-full mt-32'>
           {items.map((item, idx) => {
-            return (
-              <CardMarket key={idx} name={item.name}  price={checkPrice(item.type)} date={item.expi} vat={checkVAT(item.type)} quantity={item.quantity}
-                addItemToBasket = {addItemToBasket} calculate={calculate} type={item.type}
-              />
-            )
+            const expiDate = new Date(item.expi);
+            console.log("expdate : " + expiDate)
+            const date = new Date()
+            console.log("date : " + date)
+            if (expiDate.setHours(0, 0, 0, 0) >= date.setHours(0,0,0,0)) {
+              return (
+                  <CardMarket key={idx} name={item.name}  price={checkPrice(item.type)} date={item.expi} vat={checkVAT(item.type)} quantity={item.quantity}
+                              addItemToBasket = {addItemToBasket} calculate={calculate} type={item.type}
+                  />
+              )
+            }
           })}
         </div>
       </div>
